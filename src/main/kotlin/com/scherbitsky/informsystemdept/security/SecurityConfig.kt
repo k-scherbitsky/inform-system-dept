@@ -1,5 +1,6 @@
 package com.scherbitsky.informsystemdept.security
 
+import com.scherbitsky.informsystemdept.model.enums.UserRole
 import com.scherbitsky.informsystemdept.security.JWTAuthenticationFilter
 import com.scherbitsky.informsystemdept.security.JWTAuthorizationFilter
 import com.scherbitsky.informsystemdept.service.AdminDetailsServiceImpl
@@ -21,27 +22,28 @@ import java.util.*
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig: WebSecurityConfigurerAdapter() {
-
-    @Autowired
-    private lateinit var adminDetailsServiceImpl: AdminDetailsServiceImpl
-
-    @Autowired
-    private lateinit var jwtUtil: JWTUtil
-
+class SecurityConfig
+@Autowired constructor(private val adminDetailsServiceImpl: AdminDetailsServiceImpl, private var jwtUtil: JWTUtil)
+    : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
-                .cors().and()
                 .authorizeRequests()
                 .antMatchers("/",
-                        "/css**", "/css/**",
-                        "/img**", "/static/img/**",
-                        "/js**", "/js/**",
-                        "/api/**").permitAll()
-                .antMatchers("**", "/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/signup").permitAll()
+                        "/css/**",
+                        "/img/**",
+                        "/js/**",
+                        "/signup/**").permitAll()
                 .anyRequest().authenticated()
+                .antMatchers("/admin/**").hasAnyRole(UserRole.ADMIN.name)
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .permitAll()
 
         http.addFilter(JWTAuthenticationFilter(authenticationManager(), jwtUtil = jwtUtil))
         http.addFilter(JWTAuthorizationFilter(authenticationManager(), jwtUtil = jwtUtil, userDetailService = adminDetailsServiceImpl))
@@ -56,7 +58,6 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(adminDetailsServiceImpl).passwordEncoder(bCryptPasswordEncoder())
     }
-
 
 
 }

@@ -4,17 +4,19 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "discipline", schema = "public")
-class Discipline {
+class DisciplineEntity {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null
 
-    @Column(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     var user: UserEntity? = null
 
-    @Column(name = "subject_id")
+    @OneToOne
+    @JoinColumn(name = "subject_id", referencedColumnName = "id")
     var subject: SubjectEntity? = null
 
     @Column(name = "lecture_hours")

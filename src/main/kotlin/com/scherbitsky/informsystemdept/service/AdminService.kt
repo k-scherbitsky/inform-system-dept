@@ -1,7 +1,7 @@
-package com.scherbitsky.informsystemdept.security
+package com.scherbitsky.informsystemdept.service
 
+import com.scherbitsky.informsystemdept.dto.AdminDTO
 import com.scherbitsky.informsystemdept.model.AdminDetailsImpl
-import com.scherbitsky.informsystemdept.model.AdminEntity
 import com.scherbitsky.informsystemdept.repository.AdminRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.context.SecurityContextHolder
@@ -18,9 +18,9 @@ class AdminService {
     private lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
 
 
-    fun create(user: AdminEntity): AdminEntity {
-        user.password = bCryptPasswordEncoder.encode(user.password)
-        return adminRepository.save(user)
+    fun create(adminDTO: AdminDTO): AdminDTO {
+        adminDTO.password = bCryptPasswordEncoder.encode(adminDTO.password)
+        return AdminDTO.toDto(adminRepository.save(AdminDTO.fromDto(adminDTO)))
     }
 
     private fun getCurrentUserEmail(): String? {

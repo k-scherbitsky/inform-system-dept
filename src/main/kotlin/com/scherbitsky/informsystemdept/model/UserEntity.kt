@@ -1,5 +1,7 @@
 package com.scherbitsky.informsystemdept.model
 
+import com.scherbitsky.informsystemdept.model.enums.PositionType
+import com.scherbitsky.informsystemdept.model.enums.UserRole
 import javax.persistence.*
 
 @Entity

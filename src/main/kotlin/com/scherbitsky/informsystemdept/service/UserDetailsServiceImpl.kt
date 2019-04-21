@@ -8,10 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 
 @Service
-class AdminDetailsServiceImpl: UserDetailsService {
-
-    @Autowired
-    private lateinit var adminRepository: AdminRepository
+class AdminDetailsServiceImpl
+@Autowired constructor(private val adminRepository: AdminRepository) : UserDetailsService {
 
     override fun loadUserByUsername(userName: String?): UserDetails {
         val admin = adminRepository.findByUserName(userName)

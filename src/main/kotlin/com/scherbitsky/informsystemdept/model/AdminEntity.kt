@@ -1,5 +1,7 @@
 package com.scherbitsky.informsystemdept.model
 
+import com.scherbitsky.informsystemdept.model.enums.UserRole
+import org.hibernate.annotations.Type
 import javax.persistence.*
 
 @Entity
@@ -9,7 +11,7 @@ class AdminEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    var id: Int? = null
 
     @Column(name = "user_role")
     var userRole: UserRole? = null
@@ -17,7 +19,7 @@ class AdminEntity {
     @Column(name = "username")
     var userName: String? = null
 
-    @Column(name = "user_role")
+    @Column(name = "password")
     var password: String? = null
 
 }
