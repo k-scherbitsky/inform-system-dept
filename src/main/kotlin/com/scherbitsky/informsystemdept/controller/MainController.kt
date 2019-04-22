@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*
 @Controller
 class MainController @Autowired constructor(private val adminService: AdminService) {
 
-    @GetMapping("/")
-    fun index(mode: Model): String{
+    @RequestMapping("/")
+    fun index(mode: Model): String {
         return "index"
     }
 

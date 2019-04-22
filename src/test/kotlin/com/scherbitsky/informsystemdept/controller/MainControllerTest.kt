@@ -26,18 +26,17 @@ class MainControllerTest {
     @Test
     fun signUp() {
 
-       /* val dto = AdminDTO()
-        dto.userName = "admin"
-        dto.password = "admin"
+        /*val dto = AdminDTO()
+        dto.userName = "admin2"
+        dto.password = "admin2"
 
         val response = this.mockMvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(Gson().toJson(dto)))
                 .andDo(print())
-                .andExpect(status().isOk)
+                .andExpect(status().isCreated)
                 .andReturn().response.contentAsString
-        println("response = $response")
-    */
+        println("response = $response")*/
     }
 
     @Test
