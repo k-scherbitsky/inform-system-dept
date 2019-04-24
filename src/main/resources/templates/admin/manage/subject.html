@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Удаление преподавателя</title>
+    <title>Управление предметами</title>
     <link rel="stylesheet" href="/css/style.min.css">
 
     <!-- Latest compiled and minified CSS -->
@@ -22,35 +22,23 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="card border-primary table-card">
-            <div class="card-header">Удаление преподавателя в систему</div>
+            <div class="card-header">Управление предметами</div>
             <div class="card-body">
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">Название предмета</th>
-                        <th scope="col">Преподаватель</th>
-                        <th scope="col">Лекции</th>
-                        <th scope="col">Лабораторные</th>
-                        <th scope="col">Практические</th>
-                        <th scope="col">Курсовые</th>
-                        <th scope="col">Экзамены</th>
-                        <th scope="col">Дипломы</th>
+                        <th scope="col">Специальность</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="bindingDto : ${bindingDtoList}">
-                        <td th:text="${bindingDto.subjectName}"/>
-                        <td th:text="${bindingDto.teacherFullName}"/>
-                        <td th:text="${bindingDto.lectureHours}"/>
-                        <td th:text="${bindingDto.labsHours}"/>
-                        <td th:text="${bindingDto.practiceHours}"/>
-                        <td th:text="${bindingDto.courseHours}"/>
-                        <td th:text="${bindingDto.examHours}"/>
-                        <td th:text="${bindingDto.diplomaHours}"/>
+                    <tr th:each="subjectDto : ${subjectDtoList}">
+                        <td th:text="${subjectDto.subjectName}"/>
+                        <td th:text="${subjectDto.speciality}"/>
                         <td>
-                            <div th:onclick="'removeBinding(' +${bindingDto.id} +')'">
+                            <div th:onclick="'removeSubject(' +${subjectDto.id} +')'">
                                 <i class="fas fa-trash-alt fa-lg"></i>
                             </div>
                         </td>
@@ -63,10 +51,9 @@
         </div>
     </div>
 </div>
-
 <script th:inline="javascript">
-    function removeBinding(id) {
-        var url = "/admin/remove/binding/" + id;
+    function removeSubject(id) {
+        var url = "/admin/remove/subject/" + id;
         $.ajax({
             url: url,
             type: 'DELETE',
@@ -82,6 +69,5 @@
     $.ajax()
 
 </script>
-
 </body>
 </html>

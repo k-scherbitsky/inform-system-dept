@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление преподавателя</title>
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card border-primary table-card">
+            <div class="card-header">Управление преподавателями</div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Фамилия</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Отчество</th>
+                        <th scope="col">Должность</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="userDto : ${userDtoList}">
+                        <td th:text="${userDto.surname}"/>
+                        <td th:text="${userDto.name}"/>
+                        <td th:text="${userDto.middleName}"/>
+                        <td th:text="${userDto.position}"/>
+                        <td>
+                            <div th:onclick="'removeTeacher(' +${userDto.id} +')'">
+                                <i class="fas fa-trash-alt fa-lg"></i>
+                            </div>
+                        </td>
+                        <td><i class="fas fa-edit fa-lg"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="/admin" class="btn btn-primary" role="button">Назад</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    function removeTeacher(id) {
+        var url = "/admin/remove/teacher/" + id;
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            success: function () {
+                window.location.reload();
+            },
+            error: function (jqXHR, exception) {
+                window.location.reload();
+            }
+        })
+    }
+
+    $.ajax()
+
+</script>
+
+</body>
+</html>
