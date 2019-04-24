@@ -7,6 +7,8 @@ class BindingDTO {
     var id: Int? = null
     var userId: Int? = null
     var subjectId: Int? = null
+    var teacherFullName: String? = null
+    var subjectName: String? = null
     var lectureHours: Double? = null
     var practiceHours: Double? = null
     var labsHours: Double? = null
@@ -22,6 +24,8 @@ class BindingDTO {
             dto.id = entity.id
             dto.userId = entity.user?.id
             dto.subjectId = entity.subject?.id
+            dto.teacherFullName = "${entity.user?.surname} ${entity.user?.name} ${entity.user?.middleName}"
+            dto.subjectName = "${entity.subject?.subjectName}/${entity.subject?.speciality}"
             dto.lectureHours = entity.lectureHours
             dto.practiceHours = entity.practiceHours
             dto.labsHours = entity.labsHours

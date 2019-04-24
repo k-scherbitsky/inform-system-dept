@@ -1,5 +1,6 @@
 package com.scherbitsky.informsystemdept.controller
 
+import com.scherbitsky.informsystemdept.dto.BindingDTO
 import com.scherbitsky.informsystemdept.repository.BindingRepository
 import com.scherbitsky.informsystemdept.repository.SubjectRepository
 import com.scherbitsky.informsystemdept.repository.UserRepository
@@ -21,5 +22,11 @@ class AdminController
         return ModelAndView("admin/home")
     }
 
+    @GetMapping("/binding")
+    fun removeBinding(model: Model): String {
+        val bindingDtoList: List<BindingDTO> = bindingRepository.findAll().map { BindingDTO.toDto(it) }
+        model.addAttribute("bindingDtoList", bindingDtoList)
+        return "admin/remove/binding"
+    }
 
 }

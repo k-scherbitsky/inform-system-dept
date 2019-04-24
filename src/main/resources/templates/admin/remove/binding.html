@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление преподавателя</title>
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card border-primary table-card">
+            <div class="card-header">Удаление преподавателя в систему</div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Название предмета</th>
+                        <th scope="col">Преподаватель</th>
+                        <th scope="col">Лекции</th>
+                        <th scope="col">Лабораторные</th>
+                        <th scope="col">Практические</th>
+                        <th scope="col">Курсовые</th>
+                        <th scope="col">Экзамены</th>
+                        <th scope="col">Дипломы</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="bindingDto : ${bindingDtoList}">
+                        <td th:text="${bindingDto.subjectName}"/>
+                        <td th:text="${bindingDto.teacherFullName}"/>
+                        <td th:text="${bindingDto.lectureHours}"/>
+                        <td th:text="${bindingDto.labsHours}"/>
+                        <td th:text="${bindingDto.practiceHours}"/>
+                        <td th:text="${bindingDto.courseHours}"/>
+                        <td th:text="${bindingDto.examHours}"/>
+                        <td th:text="${bindingDto.diplomaHours}"/>
+                        <td>
+                            <div th:onclick="'removeBinding(' +${bindingDto.id} +')'">
+                                <i class="fas fa-trash-alt fa-lg"></i>
+                            </div>
+                        </td>
+                        <td><i class="fas fa-edit fa-lg"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="/admin" class="btn btn-primary" role="button">Назад</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function removeBinding(id) {
+        var url = "/admin/remove/binding/" + id;
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            success: function () {
+                window.location.reload();
+            },
+            error: function (jqXHR, exception) {
+                window.location.reload();
+            }
+        })
+    }
+
+    $.ajax()
+
+</script>
+
+</body>
+</html>

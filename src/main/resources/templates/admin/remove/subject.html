@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление предмета</title>
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card border-primary home-card">
+            <div class="card-header">Добавление предмета</div>
+            <div class="card-body">
+
+                <div>Предметы</div>
+                <label>
+                    <select class="custom-select dept-input" th:each="subject : ${allSubjects}">
+                        <option th:text="${subject.subjectName}"></option>
+                    </select>
+                </label>
+
+                <form action="#" th:action="@{/admin/add/subject}" th:object="${subjectDto}" method="post" class="dept-form">
+                    <div class="input-group dept-input">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="surname">Название</span>
+                        </div>
+                        <input type="text" class="form-control" th:field="*{subjectName}" required>
+                    </div>
+
+                    <div class="input-group dept-input">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="name">Специальность</span>
+                        </div>
+                        <input type="text" class="form-control" required th:field="*{speciality}">
+                    </div>
+                    <button type="submit" class="btn btn-primary dept-input">Добавить запись</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
