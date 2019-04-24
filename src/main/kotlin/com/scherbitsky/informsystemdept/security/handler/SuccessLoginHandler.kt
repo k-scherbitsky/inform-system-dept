@@ -17,7 +17,7 @@ class SuccessLoginHandler : AuthenticationSuccessHandler {
     override fun onAuthenticationSuccess(request: HttpServletRequest, response: HttpServletResponse, auth: Authentication?) {
 
         try {
-            redirectStrategy.sendRedirect(request, response, "/admin")
+            redirectStrategy.sendRedirect(request, response, "/admin/home")
         } catch (ex: IOException) {
             err.println(ex)
             throw RuntimeException()
