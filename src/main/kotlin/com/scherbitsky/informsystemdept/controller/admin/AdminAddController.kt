@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/admin/add")
 class AdminAddController @Autowired constructor(private val userRepository: UserRepository,
-                                               private val subjectRepository: SubjectRepository,
-                                               private val bindingRepository: BindingRepository) {
+                                                private val subjectRepository: SubjectRepository,
+                                                private val bindingRepository: BindingRepository) {
 
     @GetMapping("/subject")
     fun addSubject(model: Model): String {
@@ -35,7 +35,11 @@ class AdminAddController @Autowired constructor(private val userRepository: User
     @PostMapping("/subject")
     fun addSubject(@ModelAttribute subjectDTO: SubjectDTO): String {
         subjectRepository.save(SubjectDTO.fromDto(subjectDTO))
-        return "redirect:/admin"
+        return if (subjectDTO.id != null) {
+            "redirect:/admin/subject"
+        } else {
+            "redirect:/admin"
+        }
     }
 
     @GetMapping("/teacher")
@@ -51,7 +55,11 @@ class AdminAddController @Autowired constructor(private val userRepository: User
         userDto.userRole = UserRole.USER
         userRepository.save(UserDTO.fromDto(userDto))
 
-        return "admin/home"
+        return if (userDto.id != null) {
+            "redirect:/admin/teacher"
+        } else {
+            "redirect:/admin"
+        }
     }
 
     @GetMapping("/binding")
@@ -79,7 +87,11 @@ class AdminAddController @Autowired constructor(private val userRepository: User
 
         bindingRepository.save(disciplineEntity)
 
-        return "redirect:/admin"
+        return if (bindingDto.id != null) {
+            "redirect:/admin/binding"
+        } else {
+            "redirect:/admin"
+        }
     }
 
 }

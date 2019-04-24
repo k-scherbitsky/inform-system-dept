@@ -3,6 +3,7 @@ package com.scherbitsky.informsystemdept.controller
 import com.scherbitsky.informsystemdept.dto.BindingDTO
 import com.scherbitsky.informsystemdept.dto.SubjectDTO
 import com.scherbitsky.informsystemdept.dto.UserDTO
+import com.scherbitsky.informsystemdept.model.enums.PositionType
 import com.scherbitsky.informsystemdept.repository.BindingRepository
 import com.scherbitsky.informsystemdept.repository.SubjectRepository
 import com.scherbitsky.informsystemdept.repository.UserRepository
@@ -27,13 +28,22 @@ class AdminController
     @GetMapping("/binding")
     fun bindingTable(model: Model): String {
         val bindingDtoList: List<BindingDTO> = bindingRepository.findAll().map { BindingDTO.toDto(it) }
+        val userDtos: List<UserDTO> = userRepository.findAll().map { UserDTO.toDto(it) }
+        val subjectList: List<SubjectDTO> = subjectRepository.findAll().map { SubjectDTO.toDto(it) }
+
+        model.addAttribute("userDtos", userDtos)
+        model.addAttribute("subjectList", subjectList)
         model.addAttribute("bindingDtoList", bindingDtoList)
+        model.addAttribute("bindingDto", BindingDTO())
+
         return "admin/manage/binding"
     }
 
     @GetMapping("/teacher")
     fun teacherTable(model: Model): String {
         val userDtoList: List<UserDTO> = userRepository.findAll().map { UserDTO.toDto(it) }
+        model.addAttribute("userDto", UserDTO())
+        model.addAttribute("positionType", PositionType.values())
         model.addAttribute("userDtoList", userDtoList)
         return "admin/manage/teacher"
     }
@@ -41,6 +51,7 @@ class AdminController
     @GetMapping("/subject")
     fun subjectTable(model: Model): String {
         val subjectDtoList: List<SubjectDTO> = subjectRepository.findAll().map { SubjectDTO.toDto(it) }
+        model.addAttribute("subjectDto", SubjectDTO())
         model.addAttribute("subjectDtoList", subjectDtoList)
         return "admin/manage/subject"
     }

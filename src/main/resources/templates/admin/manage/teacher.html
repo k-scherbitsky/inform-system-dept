@@ -19,6 +19,60 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
+
+<div class="modal fade" id="editTeacher" tabindex="-1" role="dialog" aria-labelledby="editTeacherTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg discipline-card" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Изменеия связки</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form th:action="@{/admin/add/teacher}" method="post" th:object="${userDto}" class="dept-form">
+                <div class="modal-body">
+
+                    <input type="text" th:field="*{id}" style="display: none">
+
+                    <div class="input-group dept-input">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Фамилия</span>
+                        </div>
+                        <input type="text" class="form-control" th:field="*{surname}" required>
+                    </div>
+
+                    <div class="input-group dept-input">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Имя</span>
+                        </div>
+                        <input type="text" class="form-control" required th:field="*{name}">
+                    </div>
+
+                    <div class="input-group dept-input">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Отчество</span>
+                        </div>
+                        <input type="text" class="form-control" required th:field="*{middleName}">
+                    </div>
+
+                    <select class="custom-select dept-input" th:field="*{position}">
+                        <option value="0" selected>Open this select menu</option>
+                        <option th:value="${positionType[0]}">Ассистент</option>
+                        <option th:value="${positionType[1]}">Преподаватель</option>
+                        <option th:value="${positionType[2]}">Доцент</option>
+                        <option th:value="${positionType[3]}">Профессор</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="card border-primary table-card">
@@ -46,7 +100,18 @@
                                 <i class="fas fa-trash-alt fa-lg"></i>
                             </div>
                         </td>
-                        <td><i class="fas fa-edit fa-lg"></i></td>
+                        <td>
+                            <button type="button"
+                                    data-toggle="modal"
+                                    data-target="#editTeacher"
+                                    th:data-id="${userDto.id}"
+                                    th:data-surname="${userDto.surname}"
+                                    th:data-name="${userDto.name}"
+                                    th:data-middlename="${userDto.middleName}"
+                                    th:data-position="${userDto.position}">
+                                <i class="fas fa-edit fa-lg"></i>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -70,7 +135,31 @@
         })
     }
 
-    $.ajax()
+    $('#editTeacher').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+
+        var id = button.data('id');
+        var surname = button.data('surname');
+        var name = button.data('name');
+        var middlename = button.data('middlename');
+        var position = button.data('position');
+
+        console.log(id);
+        console.log(surname);
+        console.log(name);
+        console.log(middlename);
+        console.log(position);
+
+        var modal = $(this);
+        modal.find('#id').val(id);
+        console.log(modal.find('#surname'));
+        modal.find('#surname').val(surname);
+        modal.find('#name').val(name);
+        modal.find('#middleName').val(middlename);
+        modal.find('#position').val(position).selected;
+
+    })
+
 
 </script>
 

@@ -19,6 +19,44 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
+
+<div class="modal fade" id="editSubject" tabindex="-1" role="dialog" aria-labelledby="editSubjectTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg discipline-card" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Изменеия предмета</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form th:action="@{/admin/add/subject}" method="post" th:object="${subjectDto}" class="dept-form">
+                <div class="modal-body">
+                    <input type="text" th:field="*{id}" style="display: none">
+
+                    <div class="input-group dept-input">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="surname">Название</span>
+                        </div>
+                        <input type="text" class="form-control" th:field="*{subjectName}" required>
+                    </div>
+
+                    <div class="input-group dept-input">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="name">Специальность</span>
+                        </div>
+                        <input type="text" class="form-control" required th:field="*{speciality}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="card border-primary table-card">
@@ -42,7 +80,16 @@
                                 <i class="fas fa-trash-alt fa-lg"></i>
                             </div>
                         </td>
-                        <td><i class="fas fa-edit fa-lg"></i></td>
+                        <td>
+                            <button type="button"
+                                    data-toggle="modal"
+                                    data-target="#editSubject"
+                                    th:data-id="${subjectDto.id}"
+                                    th:data-subjectname="${subjectDto.subjectName}"
+                                    th:data-speciality="${subjectDto.speciality}">
+                                <i class="fas fa-edit fa-lg"></i>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -66,7 +113,18 @@
         })
     }
 
-    $.ajax()
+    $('#editSubject').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+
+        var id = button.data('id');
+        var subjectName = button.data('subjectname');
+        var speciality = button.data('speciality');
+
+        var modal = $(this);
+        modal.find('#id').val(id);
+        modal.find('#subjectName').val(subjectName);
+        modal.find("#speciality").val(speciality);
+    })
 
 </script>
 </body>

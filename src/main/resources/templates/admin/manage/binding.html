@@ -19,7 +19,95 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+
+<div class="modal fade" id="editBinding" tabindex="-1" role="dialog" aria-labelledby="editBindingTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg discipline-card" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Изменеия связки</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form th:action="@{/admin/add/binding}" method="post" th:object="${bindingDto}" class="dept-form">
+                <div class="modal-body">
+
+                    <input type="text" th:field="*{id}" style="display: none">
+
+                    <span>Название</span>
+                    <select class="custom-select dept-input" th:field="*{subjectId}">
+                        <option th:each="i : ${subjectList}" th:value="${i.id}"
+                                th:text="${i.subjectName + '/' + i.speciality}">
+                        </option>
+                    </select>
+
+                    <span>Преподаватель</span>
+                    <select class="custom-select dept-input" th:field="*{userId}">
+                        <option th:each="i : ${userDtos}" th:value="${i.id}"
+                                th:text="${i.surname + ' ' + i.name + ' ' + i.middleName}">
+                        </option>
+                    </select>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="lecture">Кол-во лекционных часов</span>
+                        </div>
+                        <input type="text" class="col-6 form-control" th:field="*{lectureHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="practice">Кол-во практических часов</span>
+                        </div>
+                        <input type="text" class="col-6 form-control" th:field="*{practiceHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="lab">Кол-во лабораторных часов</span>
+                        </div>
+                        <input type="text" class="col-6 form-control" th:field="*{labsHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="test">Кол-во зачетных часов</span>
+                        </div>
+                        <input type="text" class="col-6 form-control" th:field="*{testHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="course">Кол-во курсовых часов</span>
+                        </div>
+                        <input type="text" class="col-6 form-control" th:field="*{courseHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="exam">Кол-во экзаменационных часов</span>
+                        </div>
+                        <input type="text" class="col-6 form-control" th:field="*{examHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="diploma">Кол-во дипломных часов</span>
+                        </div>
+                        <input type="text" class="col-6 form-control" th:field="*{diplomaHours}">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container px-0">
     <div class="row justify-content-center">
         <div class="card border-primary table-card">
             <div class="card-header">Управление связками</div>
@@ -32,6 +120,7 @@
                         <th scope="col">Лекции</th>
                         <th scope="col">Лабораторные</th>
                         <th scope="col">Практические</th>
+                        <th scope="col">Зачетные</th>
                         <th scope="col">Курсовые</th>
                         <th scope="col">Экзамены</th>
                         <th scope="col">Дипломы</th>
@@ -46,6 +135,7 @@
                         <td th:text="${bindingDto.lectureHours}"/>
                         <td th:text="${bindingDto.labsHours}"/>
                         <td th:text="${bindingDto.practiceHours}"/>
+                        <td th:text="${bindingDto.testHours}"/>
                         <td th:text="${bindingDto.courseHours}"/>
                         <td th:text="${bindingDto.examHours}"/>
                         <td th:text="${bindingDto.diplomaHours}"/>
@@ -54,7 +144,23 @@
                                 <i class="fas fa-trash-alt fa-lg"></i>
                             </div>
                         </td>
-                        <td><i class="fas fa-edit fa-lg"></i></td>
+                        <td>
+                            <button type="button"
+                                    data-toggle="modal"
+                                    data-target="#editBinding"
+                                    th:data-id="${bindingDto.id}"
+                                    th:data-subjectid="${bindingDto.subjectId}"
+                                    th:data-userid="${bindingDto.userId}"
+                                    th:data-lecturehours="${bindingDto.lectureHours}"
+                                    th:data-labshours="${bindingDto.labsHours}"
+                                    th:data-practicehours="${bindingDto.practiceHours}"
+                                    th:data-testhours="${bindingDto.testHours}"
+                                    th:data-coursehours="${bindingDto.courseHours}"
+                                    th:data-examhours="${bindingDto.examHours}"
+                                    th:data-diplomahours="${bindingDto.diplomaHours}">
+                                <i class="fas fa-edit fa-lg"></i>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -79,8 +185,32 @@
         })
     }
 
-    $.ajax()
+    $('#editBinding').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
 
+        var id = button.data('id');
+        var subjectId = button.data('subjectid');
+        var userId = button.data('userid');
+        var lectureHours = button.data('lecturehours');
+        var labsHours = button.data('labshours');
+        var practiceHours = button.data('practicehours');
+        var courseHours = button.data('coursehours');
+        var examHours = button.data('examhours');
+        var diplomaHours = button.data('diplomahours');
+        var testHours = button.data('testhours');
+
+        var modal = $(this);
+        modal.find('#id').val(id);
+        modal.find("#subjectId").val(subjectId).selected;
+        modal.find("#userId").val(userId).selected;
+        modal.find('#lectureHours').val(lectureHours);
+        modal.find('#labsHours').val(labsHours);
+        modal.find('#practiceHours').val(practiceHours);
+        modal.find('#courseHours').val(courseHours);
+        modal.find('#examHours').val(examHours);
+        modal.find('#diplomaHours').val(diplomaHours);
+        modal.find('#testHours').val(testHours);
+    })
 </script>
 
 </body>

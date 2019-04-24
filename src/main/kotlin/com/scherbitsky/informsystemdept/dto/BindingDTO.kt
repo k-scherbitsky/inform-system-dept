@@ -9,13 +9,13 @@ class BindingDTO {
     var subjectId: Int? = null
     var teacherFullName: String? = null
     var subjectName: String? = null
-    var lectureHours: Double? = null
-    var practiceHours: Double? = null
-    var labsHours: Double? = null
-    var testHours: Double? = null
-    var courseHours: Double? = null
-    var examHours: Double? = null
-    var diplomaHours: Double? = null
+    var lectureHours: Int? = null
+    var practiceHours: Int? = null
+    var labsHours: Int? = null
+    var testHours: Int? = null
+    var courseHours: Int? = null
+    var examHours: Int? = null
+    var diplomaHours: Int? = null
 
     companion object {
         fun toDto(entity: BindingEntity): BindingDTO {
@@ -26,13 +26,13 @@ class BindingDTO {
             dto.subjectId = entity.subject?.id
             dto.teacherFullName = "${entity.user?.surname} ${entity.user?.name} ${entity.user?.middleName}"
             dto.subjectName = "${entity.subject?.subjectName}/${entity.subject?.speciality}"
-            dto.lectureHours = entity.lectureHours
-            dto.practiceHours = entity.practiceHours
-            dto.labsHours = entity.labsHours
-            dto.testHours = entity.testHours
-            dto.courseHours = entity.courseHours
-            dto.examHours = entity.examHours
-            dto.diplomaHours = entity.diplomaHours
+            dto.lectureHours = entity.lectureHours?.toInt()
+            dto.practiceHours = entity.practiceHours?.toInt()
+            dto.labsHours = entity.labsHours?.toInt()
+            dto.testHours = entity.testHours?.toInt()
+            dto.courseHours = entity.courseHours?.toInt()
+            dto.examHours = entity.examHours?.toInt()
+            dto.diplomaHours = entity.diplomaHours?.toInt()
 
             return dto
         }
@@ -43,13 +43,13 @@ class BindingDTO {
             entity.id = dto.id
             entity.user?.id = dto.userId
             entity.subject?.id = dto.subjectId
-            entity.lectureHours = dto.lectureHours
-            entity.practiceHours = dto.practiceHours
-            entity.labsHours = dto.labsHours
-            entity.testHours = dto.testHours
-            entity.courseHours = dto.courseHours
-            entity.examHours = dto.examHours
-            entity.diplomaHours = dto.diplomaHours
+            entity.lectureHours = dto.lectureHours?.toDouble()
+            entity.practiceHours = dto.practiceHours?.toDouble()
+            entity.labsHours = dto.labsHours?.toDouble()
+            entity.testHours = dto.testHours?.toDouble()
+            entity.courseHours = dto.courseHours?.toDouble()
+            entity.examHours = dto.examHours?.toDouble()
+            entity.diplomaHours = dto.diplomaHours?.toDouble()
             return entity
         }
     }
