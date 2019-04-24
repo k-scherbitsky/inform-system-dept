@@ -3,8 +3,8 @@ package com.scherbitsky.informsystemdept.model
 import javax.persistence.*
 
 @Entity
-@Table(name = "discipline", schema = "public")
-class DisciplineEntity {
+@Table(name = "binding", schema = "public")
+class BindingEntity {
 
     @Id
     @Column(name = "id")

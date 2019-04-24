@@ -23,7 +23,7 @@
         <div class="card border-primary discipline-card">
             <div class="card-header">Добавление преподавателя в систему</div>
             <div class="card-body">
-                <form th:action="@{/admin/add/discipline}" method="post" th:object="${disciplineDto}" class="dept-form">
+                <form th:action="@{/admin/add/binding}" method="post" th:object="${bindingDto}" class="dept-form">
 
                     <span>Название</span>
                     <select class="custom-select dept-input" th:field="*{subjectId}">

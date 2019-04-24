@@ -1,10 +1,8 @@
 package com.scherbitsky.informsystemdept.dto
 
-import com.scherbitsky.informsystemdept.model.DisciplineEntity
-import com.scherbitsky.informsystemdept.model.SubjectEntity
-import com.scherbitsky.informsystemdept.model.UserEntity
+import com.scherbitsky.informsystemdept.model.BindingEntity
 
-class DisciplineDTO {
+class BindingDTO {
 
     var id: Int? = null
     var userId: Int? = null
@@ -18,8 +16,8 @@ class DisciplineDTO {
     var diplomaHours: Double? = null
 
     companion object {
-        fun toDto(entity: DisciplineEntity): DisciplineDTO {
-            val dto = DisciplineDTO()
+        fun toDto(entity: BindingEntity): BindingDTO {
+            val dto = BindingDTO()
 
             dto.id = entity.id
             dto.userId = entity.user?.id
@@ -35,8 +33,8 @@ class DisciplineDTO {
             return dto
         }
 
-        fun fromDto(dto: DisciplineDTO): DisciplineEntity {
-            val entity = DisciplineEntity()
+        fun fromDto(dto: BindingDTO): BindingEntity {
+            val entity = BindingEntity()
 
             entity.id = dto.id
             entity.user?.id = dto.userId
