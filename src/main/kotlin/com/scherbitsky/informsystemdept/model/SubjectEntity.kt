@@ -9,7 +9,7 @@ class SubjectEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    var id: Int? = null
 
     @Column(name = "subject_name")
     var subjectName: String? = null

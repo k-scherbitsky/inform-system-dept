@@ -32,9 +32,9 @@ class SecurityConfig
                         "/css/**",
                         "/img/**",
                         "/js/**",
-                        "/signup/**").permitAll()
+                        "/signup/**", "/admin**", "/admin/**").permitAll()
                 .anyRequest().authenticated()
-                .antMatchers("/admin/**").hasAnyRole(UserRole.ADMIN.name)
+//                .antMatchers("/admin/**", "/admin").hasAnyRole(UserRole.ADMIN.name)
                 .and()
                 .formLogin()
                 .successHandler(successLoginHandler)
@@ -42,7 +42,6 @@ class SecurityConfig
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
                 .permitAll()
 
         http.addFilter(JWTAuthenticationFilter(authenticationManager(), jwtUtil = jwtUtil))

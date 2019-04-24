@@ -11,7 +11,7 @@ class UserEntity{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    var id: Int? = null
 
     @Column(name = "name")
     var name: String? = null

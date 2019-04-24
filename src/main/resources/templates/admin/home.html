@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card border-primary home-card">
+            <div class="card-header">Администратор</div>
+            <div class="card-body">
+                <div class="btn-group-vertical home-btn-group">
+                    <a href="/admin/addTeacher" class="btn btn-primary" role="button">Добавить преподавателя</a>
+                    <a href="/admin/addDiscipline" class="btn btn-primary" role="button">Добавить диссциплину</a>
+                    <a href="/admin/addDiscipline" class="btn btn-primary" role="button">Добавить предмет</a>
+                    <a href="#" class="btn btn-primary" role="button">Редактировать преподавателя</a>
+                    <a href="#" class="btn btn-primary" role="button">Редактировать дисциплину</a>
+                    <a href="#" class="btn btn-primary" role="button">Удалить преподавателя</a>
+                    <a href="#" class="btn btn-primary" role="button">Удалить дисциплину</a>
+                    <a href="#" class="btn btn-primary" role="button">Удалить предмет</a>
+                    <a href="#" class="btn btn-primary" role="button">Сделать привязку</a>
+                    <a href="#" class="btn btn-primary" role="button">Удалить связку</a>
+                    <a href="/logout" class="btn btn-primary" role="button">Выйти</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
