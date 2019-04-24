@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр нагрузки</title>
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container px-0">
+    <div class="row justify-content-center">
+        <div class="card border-primary table-card">
+            <div class="card-header">Просмотр нагрузки</div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Название предмета</th>
+                        <th scope="col">Преподаватель</th>
+                        <th scope="col">Лекции</th>
+                        <th scope="col">Лабораторные</th>
+                        <th scope="col">Практические</th>
+                        <th scope="col">Зачетные</th>
+                        <th scope="col">Курсовые</th>
+                        <th scope="col">Экзамены</th>
+                        <th scope="col">Дипломы</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="bindingDto : ${bindingList}">
+                        <td th:text="${bindingDto.subjectName}"/>
+                        <td th:text="${bindingDto.teacherFullName}"/>
+                        <td th:text="${bindingDto.lectureHours}"/>
+                        <td th:text="${bindingDto.labsHours}"/>
+                        <td th:text="${bindingDto.practiceHours}"/>
+                        <td th:text="${bindingDto.testHours}"/>
+                        <td th:text="${bindingDto.courseHours}"/>
+                        <td th:text="${bindingDto.examHours}"/>
+                        <td th:text="${bindingDto.diplomaHours}"/>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="/load" class="btn btn-primary" role="button">Назад</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

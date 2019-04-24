@@ -1,7 +1,6 @@
 package com.scherbitsky.informsystemdept.security
 
 import com.scherbitsky.informsystemdept.model.enums.UserRole
-import com.scherbitsky.informsystemdept.security.handler.SuccessLoginHandler
 import com.scherbitsky.informsystemdept.service.AdminDetailsServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -18,9 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 class SecurityConfig
 @Autowired constructor(private val adminDetailsServiceImpl: AdminDetailsServiceImpl) : WebSecurityConfigurerAdapter() {
 
-    @Autowired
-    private lateinit var successLoginHandler: SuccessLoginHandler
-
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
 
@@ -34,7 +30,7 @@ class SecurityConfig
 
         http.authorizeRequests()
                 .antMatchers("/load", "/load/**")
-                .hasAnyRole(UserRole.ROLE_USER.name, UserRole.ROLE_ADMIN.name)
+                .permitAll()
 
         http.authorizeRequests()
                 .antMatchers("/admin", "/admin/**")
