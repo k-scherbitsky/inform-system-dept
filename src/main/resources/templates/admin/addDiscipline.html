@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление преподавателя</title>
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card border-primary discipline-card">
+            <div class="card-header">Добавление преподавателя в систему</div>
+            <div class="card-body">
+                <form th:action="@{/admin/addDiscipline}" method="post" th:object="${disciplineDto}" class="dept-form">
+
+                    <span>Название</span>
+                    <select class="custom-select dept-input" th:field="*{subjectId}">
+                        <option th:each="i : ${subjectList}" th:value="${i.id}"
+                                th:text="${i.subjectName + '/' + i.speciality}">
+                        </option>
+                    </select>
+
+                    <span>Преподаватель</span>
+                    <select class="custom-select dept-input" th:field="*{userId}">
+                        <option th:each="i : ${userDtos}" th:value="${i.id}"
+                                th:text="${i.surname + ' ' + i.name + ' ' + i.middleName}">
+                        </option>
+                    </select>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="lecture">Кол-во лекционных часов</span>
+                        </div>
+                        <input type="text" class="pl-0 col-6 form-control" th:field="*{lectureHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="practice">Кол-во практических часов</span>
+                        </div>
+                        <input type="text" class="pl-0 col-6 form-control" th:field="*{practiceHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="lab">Кол-во лабораторных часов</span>
+                        </div>
+                        <input type="text" class="pl-0 col-6 form-control" th:field="*{labsHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="test">Кол-во зачетных часов</span>
+                        </div>
+                        <input type="text" class="pl-0 col-6 form-control" th:field="*{testHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="course">Кол-во курсовых часов</span>
+                        </div>
+                        <input type="text" class="pl-0 col-6 form-control" th:field="*{courseHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="exam">Кол-во экзаменационных часов</span>
+                        </div>
+                        <input type="text" class="pl-0 col-6 form-control" th:field="*{examHours}">
+                    </div>
+
+                    <div class="input-group dept-input row">
+                        <div class="col-6 pr-0 input-group-prepend">
+                            <span class="span-text input-group-text" id="diploma">Кол-во дипломных часов</span>
+                        </div>
+                        <input type="text" class="pl-0 col-6 form-control" th:field="*{diplomaHours}">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary dept-input">Добавить запись</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

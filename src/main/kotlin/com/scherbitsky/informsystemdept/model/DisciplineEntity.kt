@@ -9,7 +9,7 @@ class DisciplineEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null
+    var id: Int? = null
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
