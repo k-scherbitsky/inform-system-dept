@@ -20,7 +20,7 @@ class MainController @Autowired constructor(private val adminService: AdminServi
     @PostMapping("/signup")
     @ResponseStatus(code = HttpStatus.CREATED)
     fun signUp(@RequestBody admin: AdminDTO): AdminDTO {
-        admin.userRole = UserRole.ADMIN
+        admin.userRole = UserRole.ROLE_ADMIN
         return adminService.create(admin)
     }
 

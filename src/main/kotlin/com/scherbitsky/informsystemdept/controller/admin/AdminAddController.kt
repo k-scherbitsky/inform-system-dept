@@ -52,7 +52,7 @@ class AdminAddController @Autowired constructor(private val userRepository: User
 
     @PostMapping("/teacher")
     fun addTeacher(@ModelAttribute userDto: UserDTO): String {
-        userDto.userRole = UserRole.USER
+        userDto.userRole = UserRole.ROLE_USER
         userRepository.save(UserDTO.fromDto(userDto))
 
         return if (userDto.id != null) {
