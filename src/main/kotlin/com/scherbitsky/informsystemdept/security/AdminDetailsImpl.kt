@@ -1,5 +1,6 @@
-package com.scherbitsky.informsystemdept.model
+package com.scherbitsky.informsystemdept.security
 
+import com.scherbitsky.informsystemdept.model.AdminEntity
 import com.scherbitsky.informsystemdept.model.enums.UserRole
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority

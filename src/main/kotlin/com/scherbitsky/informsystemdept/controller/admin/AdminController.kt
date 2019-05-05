@@ -1,4 +1,4 @@
-package com.scherbitsky.informsystemdept.controller
+package com.scherbitsky.informsystemdept.controller.admin
 
 import com.scherbitsky.informsystemdept.dto.BindingDTO
 import com.scherbitsky.informsystemdept.dto.SubjectDTO
@@ -21,12 +21,12 @@ class AdminController
                        private val bindingRepository: BindingRepository) {
 
     @GetMapping("")
-    fun home(model: Model): ModelAndView {
-        return ModelAndView("admin/home")
+    fun home(model: Model): String {
+        return "admin/home"
     }
 
     @GetMapping("/binding")
-    fun bindingTable(model: Model): String {
+    fun bindingTablePage(model: Model): String {
         val bindingDtoList: List<BindingDTO> = bindingRepository.findAll().map { BindingDTO.toDto(it) }
         val userDtos: List<UserDTO> = userRepository.findAll().map { UserDTO.toDto(it) }
         val subjectList: List<SubjectDTO> = subjectRepository.findAll().map { SubjectDTO.toDto(it) }
@@ -40,7 +40,7 @@ class AdminController
     }
 
     @GetMapping("/teacher")
-    fun teacherTable(model: Model): String {
+    fun teacherTablePage(model: Model): String {
         val userDtoList: List<UserDTO> = userRepository.findAll().map { UserDTO.toDto(it) }
         model.addAttribute("userDto", UserDTO())
         model.addAttribute("positionType", PositionType.values())
@@ -49,7 +49,7 @@ class AdminController
     }
 
     @GetMapping("/subject")
-    fun subjectTable(model: Model): String {
+    fun subjectTablePage(model: Model): String {
         val subjectDtoList: List<SubjectDTO> = subjectRepository.findAll().map { SubjectDTO.toDto(it) }
         model.addAttribute("subjectDto", SubjectDTO())
         model.addAttribute("subjectDtoList", subjectDtoList)

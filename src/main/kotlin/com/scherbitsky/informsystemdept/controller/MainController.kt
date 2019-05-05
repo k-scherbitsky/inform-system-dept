@@ -30,7 +30,7 @@ class MainController @Autowired constructor(private val adminService: AdminServi
     }
 
     @PostMapping("/load/result")
-    fun getLoad(@ModelAttribute userDto: UserDTO, model: Model): String {
+    fun renderResultLoadPage(@ModelAttribute userDto: UserDTO, model: Model): String {
 
         val userEntity = userRepository
                 .findUserEntityBySurnameAndNameAndMiddleName(userDto.surname!!, userDto.name!!, userDto.middleName!!)
@@ -43,13 +43,13 @@ class MainController @Autowired constructor(private val adminService: AdminServi
 
     @PostMapping("/signup")
     @ResponseStatus(code = HttpStatus.CREATED)
-    fun signUp(@RequestBody admin: AdminDTO): AdminDTO {
+    fun signUpPage(@RequestBody admin: AdminDTO): AdminDTO {
         admin.userRole = UserRole.ROLE_ADMIN
         return adminService.create(admin)
     }
 
     @GetMapping("/login")
-    fun login(): String {
+    fun loginPage(): String {
         return "login"
     }
 }

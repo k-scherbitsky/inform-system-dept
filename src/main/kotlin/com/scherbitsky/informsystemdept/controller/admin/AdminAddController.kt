@@ -23,7 +23,7 @@ class AdminAddController @Autowired constructor(private val userRepository: User
                                                 private val bindingRepository: BindingRepository) {
 
     @GetMapping("/subject")
-    fun addSubject(model: Model): String {
+    fun addSubjectPage(model: Model): String {
         val subjectList: List<SubjectDTO> = subjectRepository.findAll().map { SubjectDTO.toDto(it) }
 
         model.addAttribute("allSubjects", subjectList)
@@ -43,7 +43,7 @@ class AdminAddController @Autowired constructor(private val userRepository: User
     }
 
     @GetMapping("/teacher")
-    fun addTeacher(model: Model): String {
+    fun addTeacherPage(model: Model): String {
 
         model.addAttribute("userDto", UserDTO())
         model.addAttribute("positionType", PositionType.values())
@@ -63,7 +63,7 @@ class AdminAddController @Autowired constructor(private val userRepository: User
     }
 
     @GetMapping("/binding")
-    fun addDiscipline(model: Model): String {
+    fun addBindingPage(model: Model): String {
 
         val userDtos: List<UserDTO> = userRepository.findAll().map { UserDTO.toDto(it) }
         val subjectList: List<SubjectDTO> = subjectRepository.findAll().map { SubjectDTO.toDto(it) }
@@ -76,7 +76,7 @@ class AdminAddController @Autowired constructor(private val userRepository: User
     }
 
     @PostMapping("/binding")
-    fun addDiscipline(@ModelAttribute bindingDto: BindingDTO): String {
+    fun addBinding(@ModelAttribute bindingDto: BindingDTO): String {
 
         val subjectEntity = bindingDto.subjectId?.let { subjectRepository.findById(it).get() }
         val userEntity = bindingDto.userId?.let { userRepository.findById(it).get() }

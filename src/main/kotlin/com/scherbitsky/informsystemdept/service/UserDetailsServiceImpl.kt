@@ -1,6 +1,6 @@
 package com.scherbitsky.informsystemdept.service
 
-import com.scherbitsky.informsystemdept.model.AdminDetailsImpl
+import com.scherbitsky.informsystemdept.security.AdminDetailsImpl
 import com.scherbitsky.informsystemdept.repository.AdminRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
