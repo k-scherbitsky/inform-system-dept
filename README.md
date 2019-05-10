@@ -1,1 +1,1 @@
-# Information System of Department
+# Information system of University department
