@@ -52,4 +52,9 @@ class MainController @Autowired constructor(private val adminService: AdminServi
     fun loginPage(): String {
         return "login"
     }
+
+    @GetMapping("/about")
+    fun aboutPage(): String {
+        return "about"
+    }
 }

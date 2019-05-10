@@ -19,16 +19,17 @@
     <div class="row justify-content-center">
         <div class="card border-primary home-card">
             <div class="card-header">Добавление предмета</div>
-            <div class="card-body">
+            <form action="#" th:action="@{/admin/add/subject}" th:object="${subjectDto}" method="post"
+                  class="dept-form">
+                <div class="card-body">
 
-                <div>Предметы</div>
-                <label>
-                    <select class="custom-select dept-input" th:each="subject : ${allSubjects}">
-                        <option th:text="${subject.subjectName}"></option>
+                    <div>Предметы, которые уже имееются</div>
+                    <select class="custom-select dept-input">
+                        <option th:each="i : ${allSubjects}" th:value="${i.id}"
+                                th:text="${i.subjectName + '/' + i.speciality}">
+                        </option>
                     </select>
-                </label>
 
-                <form action="#" th:action="@{/admin/add/subject}" th:object="${subjectDto}" method="post" class="dept-form">
                     <div class="input-group dept-input">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="surname">Название</span>
@@ -42,9 +43,14 @@
                         </div>
                         <input type="text" class="form-control" required th:field="*{speciality}">
                     </div>
-                    <button type="submit" class="btn btn-primary dept-input">Добавить запись</button>
-                </form>
-            </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Добавить запись</button>
+                    <button type="button" onclick="document.location.href='/admin'" class="btn btn-primary">
+                        Назад
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

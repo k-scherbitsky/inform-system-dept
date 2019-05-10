@@ -22,22 +22,24 @@
     <div class="row justify-content-center">
         <div class="card border-primary home-card">
             <article class="card-body">
-                <a href="" class="float-right btn btn-outline-primary">Sign up</a>
-                <h4 class="card-title mb-4 mt-1">Sign in</h4>
+                <h4 class="card-title mb-4 mt-1">Вход</h4>
                 <div class="failed-login" th:if="${param.error}">
-                    Invalid username and password.
+                    Неправильный логин или пароль.
                 </div>
                 <form th:action="@{/login}" method="post">
                     <div class="form-group">
-                        <label>Your email</label>
-                        <input name="username" class="form-control" placeholder="Email" type="text">
+                        <label>Ваш логин</label>
+                        <input name="username" class="form-control" placeholder="логин" type="text">
                     </div>
                     <div class="form-group">
-                        <label>Your password</label>
+                        <label>Ваш пароль</label>
                         <input name="password" class="form-control" placeholder="******" type="password">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block"> Login</button>
+                        <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                        <button type="button" onclick="document.location.href='/'" class="btn btn-primary btn-block">
+                            Назад
+                        </button>
                     </div>
                 </form>
             </article>

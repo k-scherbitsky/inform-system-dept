@@ -19,8 +19,8 @@
     <div class="row justify-content-center">
         <div class="card border-primary home-card">
             <div class="card-header">Добавление дисциплины в систему</div>
-            <div class="card-body">
-                <form action="#" th:action="@{/admin/add/teacher}" th:object="${userDto}" method="post" class="dept-form">
+            <form action="#" th:action="@{/admin/add/teacher}" th:object="${userDto}" method="post" class="dept-form">
+                <div class="card-body">
                     <div class="input-group dept-input">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="surname">Фамилия</span>
@@ -50,11 +50,17 @@
                         <option th:value="${positionType[3]}">Профессор</option>
                     </select>
 
-                    <button type="submit" class="btn btn-primary dept-input">Добавить запись</button>
-                </form>
-            </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Добавить запись</button>
+                    <button type="button" onclick="document.location.href='/admin'" class="btn btn-primary">
+                        Назад
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

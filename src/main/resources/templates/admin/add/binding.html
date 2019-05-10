@@ -22,8 +22,8 @@
     <div class="row justify-content-center">
         <div class="card border-primary discipline-card">
             <div class="card-header">Добавление преподавателя в систему</div>
-            <div class="card-body">
-                <form th:action="@{/admin/add/binding}" method="post" th:object="${bindingDto}" class="dept-form">
+            <form th:action="@{/admin/add/binding}" method="post" th:object="${bindingDto}" class="dept-form">
+                <div class="card-body">
 
                     <span>Название</span>
                     <select class="custom-select dept-input" th:field="*{subjectId}">
@@ -87,10 +87,15 @@
                         </div>
                         <input type="text" class="pl-0 col-6 form-control" th:field="*{diplomaHours}">
                     </div>
+                </div>
 
-                    <button type="submit" class="btn btn-primary dept-input">Добавить запись</button>
-                </form>
-            </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Добавить запись</button>
+                    <button type="button" onclick="document.location.href='/admin'" class="btn btn-primary">
+                        Назад
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
