@@ -19,8 +19,8 @@
     <div class="row justify-content-center">
         <div class="card border-primary table-card">
             <div class="card-header">Просмотр нагрузки</div>
-            <div class="card-body">
-                <table class="table table-striped">
+            <div class="card-body" th:switch="${isFound}">
+                <table th:case="true" class="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">Название предмета</th>
@@ -48,6 +48,7 @@
                     </tr>
                     </tbody>
                 </table>
+                <div th:case="false" class="alert alert-danger" role="alert">По вашему запросу ничего не найдено!</div>
                 <a href="/load" class="btn btn-primary" role="button">Назад</a>
             </div>
         </div>

@@ -3,6 +3,7 @@ package com.scherbitsky.informsystemdept.controller
 import com.scherbitsky.informsystemdept.dto.AdminDTO
 import com.scherbitsky.informsystemdept.dto.BindingDTO
 import com.scherbitsky.informsystemdept.dto.UserDTO
+import com.scherbitsky.informsystemdept.model.UserEntity
 import com.scherbitsky.informsystemdept.model.enums.UserRole
 import com.scherbitsky.informsystemdept.repository.BindingRepository
 import com.scherbitsky.informsystemdept.repository.UserRepository
@@ -32,12 +33,20 @@ class MainController @Autowired constructor(private val adminService: AdminServi
     @PostMapping("/load/result")
     fun renderResultLoadPage(@ModelAttribute userDto: UserDTO, model: Model): String {
 
-        val userEntity = userRepository
-                .findUserEntityBySurnameAndNameAndMiddleName(userDto.surname!!, userDto.name!!, userDto.middleName!!)
+        val userEntity: UserEntity? = if (userDto.middleName.isNullOrEmpty()) {
+            userRepository.findUserEntitiesBySurnameAndName(userDto.surname!!, userDto.name!!)
+        } else {
+            userRepository
+                    .findUserEntityBySurnameAndNameAndMiddleName(userDto.surname!!, userDto.name!!, userDto.middleName!!)
+        }
 
-        val bindingList = bindingRepository.findAllByUser(userEntity).map { BindingDTO.toDto(it) }
-
-        model.addAttribute("bindingList", bindingList)
+        if (userEntity == null) {
+            model.addAttribute("isFound", false)
+        } else {
+            val bindingList = bindingRepository.findAllByUser(userEntity).map { BindingDTO.toDto(it) }
+            model.addAttribute("isFound", true)
+            model.addAttribute("bindingList", bindingList)
+        }
         return "load/result"
     }
 

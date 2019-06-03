@@ -24,7 +24,11 @@ class BindingDTO {
             dto.id = entity.id
             dto.userId = entity.user?.id
             dto.subjectId = entity.subject?.id
-            dto.teacherFullName = "${entity.user?.surname} ${entity.user?.name} ${entity.user?.middleName}"
+            dto.teacherFullName = if (entity.user?.middleName == null) {
+                "${entity.user?.surname} ${entity.user?.name}"
+            } else {
+                "${entity.user?.surname} ${entity.user?.name} ${entity.user?.middleName}"
+            }
             dto.subjectName = "${entity.subject?.subjectName}/${entity.subject?.speciality}"
             dto.lectureHours = entity.lectureHours?.toInt()
             dto.practiceHours = entity.practiceHours?.toInt()
