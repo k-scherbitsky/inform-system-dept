@@ -5,7 +5,27 @@
 -- Dumped from database version 11.2
 -- Dumped by pg_dump version 11.2
 
--- Started on 2019-06-02 16:24:31
+-- Started on 2019-06-04 02:56:42
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 2849 (class 1262 OID 26841)
+-- Name: dept; Type: DATABASE; Schema: -; Owner: -
+--
+
+CREATE DATABASE dept WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'English_United States.1252' LC_CTYPE = 'English_United States.1252';
+
+
+\connect dept
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +39,7 @@ SET row_security = off;
 
 --
 -- TOC entry 599 (class 1247 OID 26848)
--- Name: position; Type: TYPE; Schema: public; Owner: postgres
+-- Name: position; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE public."position" AS ENUM (
@@ -30,11 +50,9 @@ CREATE TYPE public."position" AS ENUM (
 );
 
 
-ALTER TYPE public."position" OWNER TO postgres;
-
 --
 -- TOC entry 596 (class 1247 OID 26843)
--- Name: user_type; Type: TYPE; Schema: public; Owner: postgres
+-- Name: user_type; Type: TYPE; Schema: public; Owner: -
 --
 
 CREATE TYPE public.user_type AS ENUM (
@@ -43,15 +61,13 @@ CREATE TYPE public.user_type AS ENUM (
 );
 
 
-ALTER TYPE public.user_type OWNER TO postgres;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
 -- TOC entry 203 (class 1259 OID 26893)
--- Name: admins; Type: TABLE; Schema: public; Owner: postgres
+-- Name: admins; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.admins (
@@ -62,11 +78,9 @@ CREATE TABLE public.admins (
 );
 
 
-ALTER TABLE public.admins OWNER TO postgres;
-
 --
 -- TOC entry 202 (class 1259 OID 26891)
--- Name: admins_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: admins_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.admins_id_seq
@@ -78,12 +92,10 @@ CREATE SEQUENCE public.admins_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.admins_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2849 (class 0 OID 0)
+-- TOC entry 2850 (class 0 OID 0)
 -- Dependencies: 202
--- Name: admins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: admins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.admins_id_seq OWNED BY public.admins.id;
@@ -91,7 +103,7 @@ ALTER SEQUENCE public.admins_id_seq OWNED BY public.admins.id;
 
 --
 -- TOC entry 199 (class 1259 OID 26867)
--- Name: binding; Type: TABLE; Schema: public; Owner: postgres
+-- Name: binding; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.binding (
@@ -108,12 +120,10 @@ CREATE TABLE public.binding (
 );
 
 
-ALTER TABLE public.binding OWNER TO postgres;
-
 --
--- TOC entry 2850 (class 0 OID 0)
+-- TOC entry 2851 (class 0 OID 0)
 -- Dependencies: 199
--- Name: COLUMN binding.test_hours; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: COLUMN binding.test_hours; Type: COMMENT; Schema: public; Owner: -
 --
 
 COMMENT ON COLUMN public.binding.test_hours IS 'Зачетные часы
@@ -122,7 +132,7 @@ COMMENT ON COLUMN public.binding.test_hours IS 'Зачетные часы
 
 --
 -- TOC entry 198 (class 1259 OID 26865)
--- Name: discipline_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: discipline_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.discipline_id_seq
@@ -134,12 +144,10 @@ CREATE SEQUENCE public.discipline_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.discipline_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2851 (class 0 OID 0)
+-- TOC entry 2852 (class 0 OID 0)
 -- Dependencies: 198
--- Name: discipline_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: discipline_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.discipline_id_seq OWNED BY public.binding.id;
@@ -147,7 +155,7 @@ ALTER SEQUENCE public.discipline_id_seq OWNED BY public.binding.id;
 
 --
 -- TOC entry 201 (class 1259 OID 26880)
--- Name: subjects; Type: TABLE; Schema: public; Owner: postgres
+-- Name: subjects; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.subjects (
@@ -157,11 +165,9 @@ CREATE TABLE public.subjects (
 );
 
 
-ALTER TABLE public.subjects OWNER TO postgres;
-
 --
 -- TOC entry 200 (class 1259 OID 26878)
--- Name: subjects_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: subjects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.subjects_id_seq
@@ -173,12 +179,10 @@ CREATE SEQUENCE public.subjects_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.subjects_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2852 (class 0 OID 0)
+-- TOC entry 2853 (class 0 OID 0)
 -- Dependencies: 200
--- Name: subjects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: subjects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.subjects_id_seq OWNED BY public.subjects.id;
@@ -186,24 +190,22 @@ ALTER SEQUENCE public.subjects_id_seq OWNED BY public.subjects.id;
 
 --
 -- TOC entry 197 (class 1259 OID 26859)
--- Name: users; Type: TABLE; Schema: public; Owner: postgres
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.users (
     id integer NOT NULL,
     name character varying(30) NOT NULL,
     surname character varying(30) NOT NULL,
-    middle_name character varying(30) NOT NULL,
+    middle_name character varying(30),
     "position" character varying(20),
     user_role integer
 );
 
 
-ALTER TABLE public.users OWNER TO postgres;
-
 --
 -- TOC entry 196 (class 1259 OID 26857)
--- Name: table_name_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: table_name_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.table_name_id_seq
@@ -215,12 +217,10 @@ CREATE SEQUENCE public.table_name_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.table_name_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2853 (class 0 OID 0)
+-- TOC entry 2854 (class 0 OID 0)
 -- Dependencies: 196
--- Name: table_name_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: table_name_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.table_name_id_seq OWNED BY public.users.id;
@@ -228,7 +228,7 @@ ALTER SEQUENCE public.table_name_id_seq OWNED BY public.users.id;
 
 --
 -- TOC entry 2712 (class 2604 OID 26896)
--- Name: admins id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: admins id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.admins ALTER COLUMN id SET DEFAULT nextval('public.admins_id_seq'::regclass);
@@ -236,7 +236,7 @@ ALTER TABLE ONLY public.admins ALTER COLUMN id SET DEFAULT nextval('public.admin
 
 --
 -- TOC entry 2710 (class 2604 OID 26870)
--- Name: binding id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: binding id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.binding ALTER COLUMN id SET DEFAULT nextval('public.discipline_id_seq'::regclass);
@@ -244,7 +244,7 @@ ALTER TABLE ONLY public.binding ALTER COLUMN id SET DEFAULT nextval('public.disc
 
 --
 -- TOC entry 2711 (class 2604 OID 26883)
--- Name: subjects id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: subjects id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.subjects ALTER COLUMN id SET DEFAULT nextval('public.subjects_id_seq'::regclass);
@@ -252,7 +252,7 @@ ALTER TABLE ONLY public.subjects ALTER COLUMN id SET DEFAULT nextval('public.sub
 
 --
 -- TOC entry 2709 (class 2604 OID 26862)
--- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.table_name_id_seq'::regclass);
@@ -260,7 +260,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.table_
 
 --
 -- TOC entry 2720 (class 2606 OID 26898)
--- Name: admins admins_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: admins admins_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.admins
@@ -269,7 +269,7 @@ ALTER TABLE ONLY public.admins
 
 --
 -- TOC entry 2716 (class 2606 OID 26872)
--- Name: binding discipline_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: binding discipline_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.binding
@@ -278,7 +278,7 @@ ALTER TABLE ONLY public.binding
 
 --
 -- TOC entry 2718 (class 2606 OID 26885)
--- Name: subjects subjects_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: subjects subjects_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.subjects
@@ -287,7 +287,7 @@ ALTER TABLE ONLY public.subjects
 
 --
 -- TOC entry 2714 (class 2606 OID 26864)
--- Name: users table_name_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: users table_name_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
@@ -296,7 +296,7 @@ ALTER TABLE ONLY public.users
 
 --
 -- TOC entry 2722 (class 2606 OID 35232)
--- Name: binding discipline_subjects_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: binding discipline_subjects_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.binding
@@ -305,14 +305,14 @@ ALTER TABLE ONLY public.binding
 
 --
 -- TOC entry 2721 (class 2606 OID 35227)
--- Name: binding discipline_users_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: binding discipline_users_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.binding
     ADD CONSTRAINT discipline_users_id_fk FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
--- Completed on 2019-06-02 16:24:32
+-- Completed on 2019-06-04 02:56:43
 
 --
 -- PostgreSQL database dump complete
